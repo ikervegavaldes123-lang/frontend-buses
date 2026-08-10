@@ -1,8 +1,9 @@
-import AppRoutes from "./routes/AppRoutes";
-
-
 function App() {
-  return <AppRoutes />;
+  return (
+    <div>
+      <h1>mi proyecto</h1>
+    </div>
+  );
 }
 
 
