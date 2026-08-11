@@ -1,0 +1,111 @@
+/* Contenedor principal del formulario */
+.login-form {
+  width: 100%;
+  max-width: 420px;
+  margin: 80px auto;
+  padding: 35px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  box-sizing: border-box;
+}
+
+/* Título */
+.login-form h1 {
+  margin: 0 0 30px;
+  text-align: center;
+  color: #1f2937;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+/* Contenedores de los campos */
+.login-form > div {
+  margin-bottom: 20px;
+}
+
+/* Etiquetas */
+.login-form label {
+  display: block;
+  margin-bottom: 8px;
+  color: #374151;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Inputs */
+.login-form input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background-color: #f9fafb;
+  color: #111827;
+  font-size: 15px;
+  outline: none;
+  box-sizing: border-box;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+/* Input cuando recibe el foco */
+.login-form input:focus {
+  border-color: #2563eb;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+/* Placeholder */
+.login-form input::placeholder {
+  color: #9ca3af;
+}
+
+/* Mensaje de error */
+.login-form p[role="alert"] {
+  margin: 0 0 20px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background-color: #fee2e2;
+  color: #b91c1c;
+  font-size: 14px;
+}
+
+/* Botón */
+.login-form button {
+  width: 100%;
+  padding: 13px;
+  border: none;
+  border-radius: 8px;
+  background-color: #2563eb;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    transform 0.1s ease;
+}
+
+/* Hover */
+.login-form button:hover {
+  background-color: #1d4ed8;
+}
+
+/* Click */
+.login-form button:active {
+  transform: scale(0.98);
+}
+
+/* Diseño para celulares */
+@media (max-width: 480px) {
+  .login-form {
+    margin: 30px 15px;
+    padding: 25px 20px;
+  }
+
+  .login-form h1 {
+    font-size: 24px;
+  }
+}
