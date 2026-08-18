@@ -4,14 +4,23 @@
 
 :root {
   font-family: Arial, Helvetica, sans-serif;
-  color: #101010;
-  background: #f5f5f5;
+  color: #111;
+  background: #fff;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100%;
 }
 
 body {
-  margin: 0;
-  min-width: 320px;
-  background: #f5f5f5;
+  min-height: 100vh;
+  background: #fff;
 }
 
 button {
@@ -19,15 +28,20 @@ button {
 }
 
 .dashboard-layout {
-  min-height: 100vh;
+  width: min(100% - 8px, 1100px);
+  min-height: calc(100vh - 16px);
+  margin: 8px auto;
   display: flex;
-  background: #f4f4f4;
+  background: #fff;
+  border: 4px solid #0b2043;
+  overflow: hidden;
 }
 
 .dashboard-sidebar {
-  width: 260px;
-  min-height: 100vh;
-  padding: 34px 22px 24px;
+  width: 175px;
+  min-width: 175px;
+  min-height: 100%;
+  padding: 34px 11px 12px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -38,39 +52,42 @@ button {
 .sidebar-brand {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  padding: 0 4px 28px;
+  gap: 5px;
+  padding: 0 4px 27px;
 }
 
 .sidebar-brand strong {
-  font-size: 17px;
+  font-size: 13px;
+  line-height: 1.2;
 }
 
 .sidebar-brand span {
-  color: #9ca8bb;
-  font-size: 15px;
+  color: #aeb7c6;
+  font-size: 13px;
 }
 
 .sidebar-nav {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 2px;
 }
 
 .sidebar-link {
+  width: 100%;
+  min-height: 42px;
   border: 0;
   background: transparent;
   color: #fff;
   text-align: left;
-  padding: 14px 16px;
+  padding: 10px 15px;
   border-radius: 25px;
   cursor: pointer;
+  font-size: 13px;
   font-weight: 600;
 }
 
 .sidebar-link span {
-  width: 24px;
-  display: inline-block;
+  display: none;
 }
 
 .sidebar-link.active,
@@ -80,19 +97,19 @@ button {
 
 .sidebar-user {
   display: grid;
-  grid-template-columns: 48px 1fr auto;
+  grid-template-columns: 43px minmax(0, 1fr);
   gap: 10px;
   align-items: center;
 }
 
 .user-avatar {
-  width: 48px;
-  height: 48px;
+  width: 43px;
+  height: 43px;
   border-radius: 50%;
   display: grid;
   place-items: center;
   background: #143cff;
-  font-size: 18px;
+  font-size: 14px;
 }
 
 .user-info {
@@ -110,54 +127,51 @@ button {
 }
 
 .user-info strong {
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .user-info span {
   color: #fff;
-  font-size: 11px;
+  font-size: 9px;
 }
 
 .logout-button {
-  border: 0;
-  background: transparent;
-  color: #9ca8bb;
-  cursor: pointer;
-  font-size: 12px;
+  display: none;
 }
 
 .dashboard-content {
   flex: 1;
-  max-width: 1180px;
-  padding: 34px 40px 48px;
-  margin: 0 auto;
+  min-width: 0;
+  padding: 15px 29px 20px;
+  background: #fff;
 }
 
 .dashboard-header h1 {
   margin: 0;
-  font-size: 21px;
+  font-size: 14px;
+  line-height: 1.2;
 }
 
 .dashboard-header p {
-  margin: 3px 0 26px;
+  margin: 1px 0 23px;
   color: #777;
-  font-size: 14px;
+  font-size: 10px;
 }
 
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 14px;
-  margin-bottom: 20px;
+  gap: 9px;
+  margin-bottom: 18px;
 }
 
 .stat-card {
-  min-height: 78px;
-  padding: 12px 15px;
+  min-height: 55px;
+  padding: 8px 11px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border: 3px solid #8a8a8a;
+  border: 3px solid #898989;
   border-radius: 17px;
   background: #fff;
 }
@@ -165,26 +179,26 @@ button {
 .stat-card div {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 3px;
 }
 
 .stat-card span:first-child {
   color: #333;
-  font-size: 12px;
+  font-size: 9px;
 }
 
 .stat-card strong {
-  font-size: 15px;
+  font-size: 12px;
 }
 
 .stat-icon {
   width: 27px;
-  height: 27px;
+  height: 24px;
   display: grid;
   place-items: center;
-  border-radius: 7px;
+  border-radius: 6px;
   color: #fff;
-  font-size: 13px;
+  font-size: 11px;
 }
 
 .stat-icon.blue { background: #173cff; }
@@ -195,12 +209,12 @@ button {
 .dashboard-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 14px;
+  gap: 13px;
 }
 
 .dashboard-panel {
-  min-height: 350px;
-  border: 3px solid #8a8a8a;
+  min-height: 253px;
+  border: 3px solid #898989;
   border-radius: 17px;
   background: #fff;
   overflow: hidden;
@@ -208,13 +222,13 @@ button {
 
 .dashboard-panel h2 {
   margin: 0;
-  padding: 13px 15px;
-  font-size: 16px;
+  padding: 11px 11px 9px;
+  font-size: 13px;
 }
 
 .shift-item {
-  min-height: 75px;
-  padding: 13px 15px;
+  min-height: 64px;
+  padding: 10px 11px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -228,20 +242,20 @@ button {
 }
 
 .shift-item strong {
-  font-size: 13px;
+  font-size: 11px;
 }
 
 .shift-item span,
 .shift-item small {
   color: #666;
-  font-size: 11px;
+  font-size: 9px;
 }
 
 .shift-status {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 5px;
+  gap: 4px;
 }
 
 .shift-status span {
@@ -249,11 +263,11 @@ button {
   color: #111;
   background: #d9ff00;
   border: 1px solid #8aa000;
-  font-size: 10px;
+  font-size: 8px;
 }
 
 .performance-panel {
-  padding-bottom: 16px;
+  padding-bottom: 8px;
 }
 
 .performance-panel h2 {
@@ -261,15 +275,15 @@ button {
 }
 
 .metric {
-  padding: 0 15px;
-  margin: 0 0 17px;
+  padding: 0 11px;
+  margin: 0 0 14px;
 }
 
 .metric-heading {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 7px;
-  font-size: 12px;
+  margin-bottom: 6px;
+  font-size: 9px;
 }
 
 .metric-track {
@@ -289,13 +303,18 @@ button {
 
 .panel-divider {
   height: 1px;
-  margin: 10px 15px 0;
+  margin: 8px 11px 0;
   background: #999;
 }
 
 @media (max-width: 900px) {
+  .dashboard-layout {
+    width: calc(100% - 12px);
+  }
+
   .dashboard-sidebar {
-    width: 220px;
+    width: 175px;
+    min-width: 175px;
   }
 
   .stats-grid,
@@ -306,13 +325,19 @@ button {
 
 @media (max-width: 650px) {
   .dashboard-layout {
+    width: 100%;
+    min-height: 100vh;
+    margin: 0;
+    border-width: 3px;
     display: block;
   }
 
   .dashboard-sidebar {
     width: 100%;
+    min-width: 0;
     min-height: auto;
     gap: 20px;
+    padding: 24px 15px 15px;
   }
 
   .dashboard-content {
