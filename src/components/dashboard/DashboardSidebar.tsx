@@ -1,3 +1,6 @@
+// src/components/dashboard/DashboardSidebar.tsx
+
+import { useNavigate, useLocation } from "react-router-dom";
 import type { User } from "../../types/auth";
 
 type DashboardSidebarProps = {
@@ -5,7 +8,13 @@ type DashboardSidebarProps = {
   onLogout: () => void;
 };
 
-function DashboardSidebar({ user, onLogout }: DashboardSidebarProps) {
+function DashboardSidebar({
+  user,
+  onLogout,
+}: DashboardSidebarProps) {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   return (
     <aside className="dashboard-sidebar">
       <div>
@@ -14,32 +23,101 @@ function DashboardSidebar({ user, onLogout }: DashboardSidebarProps) {
           <span>Transporte</span>
         </div>
 
-        <nav className="sidebar-nav" aria-label="Navegación principal">
-          <button className="sidebar-link active" type="button">
-            <span>▦</span> Dashboard
+        <nav
+          className="sidebar-nav"
+          aria-label="Navegación principal"
+        >
+          {/* DASHBOARD */}
+          <button
+            className={`sidebar-link ${
+              location.pathname === "/" ? "active" : ""
+            }`}
+            type="button"
+            onClick={() => navigate("/")}
+          >
+            <span>▦</span>
+            Dashboard
           </button>
-          <button className="sidebar-link" type="button">
-            <span>♙</span> Choferes
+
+          {/* CHOFERES */}
+          <button
+            className={`sidebar-link ${
+              location.pathname === "/choferes"
+                ? "active"
+                : ""
+            }`}
+            type="button"
+            onClick={() => navigate("/choferes")}
+          >
+            <span>♙</span>
+            Choferes
           </button>
-          <button className="sidebar-link" type="button">
-            <span>▣</span> Buses
+
+          {/* AUTOBUSES */}
+          <button
+            className={`sidebar-link ${
+              location.pathname === "/autobuses"
+                ? "active"
+                : ""
+            }`}
+            type="button"
+            onClick={() => navigate("/autobuses")}
+          >
+            <span>▣</span>
+            Autobuses
           </button>
-          <button className="sidebar-link" type="button">
-            <span>◷</span> Horario Buses
+
+          {/* HORARIO BUSES */}
+          <button
+            className={`sidebar-link ${
+              location.pathname === "/horario-buses"
+                ? "active"
+                : ""
+            }`}
+            type="button"
+            onClick={() => navigate("/horario-buses")}
+          >
+            <span>◷</span>
+            Horario Buses
           </button>
-          <button className="sidebar-link" type="button">
-            <span>▤</span> Asientos
+
+          {/* ASIENTOS */}
+          <button
+            className={`sidebar-link ${
+              location.pathname === "/asientos"
+                ? "active"
+                : ""
+            }`}
+            type="button"
+            onClick={() => navigate("/asientos")}
+          >
+            <span>▤</span>
+            Asientos
           </button>
         </nav>
       </div>
 
+      {/* USUARIO */}
       <div className="sidebar-user">
-        <div className="user-avatar">{user?.name?.charAt(0).toUpperCase() ?? "A"}</div>
-        <div className="user-info">
-          <strong>{user?.name ?? "Administrador"}</strong>
-          <span>{user?.carnet ?? "admin@gmail.com"}</span>
+        <div className="user-avatar">
+          {user?.name?.charAt(0).toUpperCase() ?? "A"}
         </div>
-        <button className="logout-button" type="button" onClick={onLogout}>
+
+        <div className="user-info">
+          <strong>
+            {user?.name ?? "Administrador"}
+          </strong>
+
+          <span>
+            {user?.carnet ?? "admin@gmail.com"}
+          </span>
+        </div>
+
+        <button
+          className="logout-button"
+          type="button"
+          onClick={onLogout}
+        >
           Salir
         </button>
       </div>
