@@ -67,6 +67,28 @@ button { cursor: pointer; }
 .driver-form input,.driver-form select { width: 100%; border: 1px solid #c9ced6; border-radius: 7px; padding: 9px 10px; outline: none; background: #fff; color: #111; font-size: 11px; }
 .driver-form input:focus,.driver-form select:focus { border-color: #1749d1; box-shadow: 0 0 0 2px rgba(23,73,209,.1); }
 .driver-form-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 18px; } .secondary-button,.primary-button { border: 0; border-radius: 7px; padding: 9px 13px; font-size: 10px; font-weight: 700; } .secondary-button { color: #333; background: #edf0f3; } .primary-button { color: #fff; background: #1749d1; }
+
+/* Rendimiento semanal */
+.performance-panel { min-height: 300px; padding: 0 20px 16px; }
+.performance-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 15px; padding: 18px 0 14px; border-bottom: 1px solid #edf0f5; }
+.performance-header h2 { padding: 0; margin: 2px 0 4px; font-size: 15px; color: #18263e; }
+.performance-header p { margin: 0; color: #8a95a5; font-size: 9px; }
+.performance-eyebrow { color: #1749d1; font-size: 8px; font-weight: 800; letter-spacing: 1.2px; }
+.performance-period { padding: 6px 9px; border: 1px solid #e3e9f2; border-radius: 8px; color: #69768a; background: #f8faff; font-size: 8px; font-weight: 700; white-space: nowrap; }
+.performance-metrics { display: flex; flex-direction: column; gap: 17px; padding: 18px 0 15px; }
+.metric { width: 100%; }
+.metric-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 8px; }
+.metric-name { display: flex; align-items: center; gap: 9px; color: #435069; font-size: 10px; font-weight: 600; }
+.metric-name > span:last-child { white-space: nowrap; }
+.metric-heading strong { color: #17243c; font-size: 12px; }
+.metric-icon { width: 27px; height: 27px; display: grid; place-items: center; border-radius: 8px; font-size: 12px; }
+.metric-icon.blue { background: #edf2ff; } .metric-icon.green { background: #e5f8ef; } .metric-icon.purple { background: #f3eafa; }
+.metric-track { width: 100%; height: 9px; overflow: hidden; border-radius: 999px; background: #edf1f6; box-shadow: inset 0 1px 2px rgba(20,35,60,.06); }
+.metric-fill { height: 100%; border-radius: inherit; transition: width .5s ease; }
+.metric-fill.blue { background: linear-gradient(90deg,#1749d1,#4d7df0); } .metric-fill.green { background: linear-gradient(90deg,#159b60,#37c77f); } .metric-fill.purple { background: linear-gradient(90deg,#8745ba,#b879dd); }
+.performance-panel .panel-divider { height: 1px; background: #edf0f5; }
+.performance-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 12px; color: #7c8799; font-size: 9px; }
+.performance-footer strong { color: #1749d1; font-size: 12px; }
 @media (max-width:900px) { .stats-grid { grid-template-columns: repeat(2,1fr); } .dashboard-grid { grid-template-columns: 1fr; } }
 @media (max-width:760px) { .dashboard-layout { width:100%; min-height:100vh; margin:0; border:0; border-radius:0; } .dashboard-sidebar { width:175px; min-width:175px; } .dashboard-content { padding:24px 20px; } }
-@media (max-width:560px) { .dashboard-layout { display:block; } .dashboard-sidebar { width:100%; min-width:0; min-height:auto; padding:15px; } .sidebar-brand { padding-bottom:12px; } .sidebar-nav { display:grid; grid-template-columns:repeat(2,1fr); } .dashboard-content { padding:20px 12px; } .dashboard-main-header { display:block; } .dashboard-welcome { margin-bottom:18px; } .stats-grid { grid-template-columns:1fr 1fr; gap:9px; } .stat-card { padding:13px; } .stat-card strong { font-size:19px; } }
+@media (max-width:560px) { .dashboard-layout { display:block; } .dashboard-sidebar { width:100%; min-width:0; min-height:auto; padding:15px; } .sidebar-brand { padding-bottom:12px; } .sidebar-nav { display:grid; grid-template-columns:repeat(2,1fr); } .dashboard-content { padding:20px 12px; } .dashboard-main-header { display:block; } .dashboard-welcome { margin-bottom:18px; } .stats-grid { grid-template-columns:1fr 1fr; gap:9px; } .stat-card { padding:13px; } .stat-card strong { font-size:19px; } .performance-header { display:block; } .performance-period { display:inline-block; margin-top:10px; } .performance-panel { padding-left:14px; padding-right:14px; } }
