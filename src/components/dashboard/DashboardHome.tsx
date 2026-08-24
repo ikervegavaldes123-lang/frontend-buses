@@ -28,10 +28,10 @@ function DashboardHome({ user, onLogout }: DashboardHomeProps) {
         </header>
 
         <section className="stats-grid dashboard-stats" aria-label="Resumen">
-          <StatCard label="Choferes activos" value="24" icon="P" tone="blue" />
-          <StatCard label="Turnos Hoy" value="18" icon="T" tone="green" />
-          <StatCard label="Pasajes Vendidos" value="342" icon="P" tone="purple" />
-          <StatCard label="Ingresos Hoy" value="$1,250" icon="$" tone="orange" />
+          <StatCard label="Choferes activos" value="24" icon="👨‍✈️" tone="blue" />
+          <StatCard label="Turnos Hoy" value="18" icon="🕐" tone="green" />
+          <StatCard label="Pasajes Vendidos" value="342" icon="🎫" tone="purple" />
+          <StatCard label="Ingresos Hoy" value="$1,250" icon="💰" tone="orange" />
         </section>
 
         <section className="dashboard-grid dashboard-main-grid">
