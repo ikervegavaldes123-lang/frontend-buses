@@ -1,6 +1,6 @@
 // src/components/horario-buses/HorarioBusesTable.tsx
 
-type HorarioBus = {
+export type HorarioBus = {
   id: number;
   bus: string;
   placa: string;
@@ -11,50 +11,21 @@ type HorarioBus = {
   estado: "Programado" | "En ruta" | "Finalizado";
 };
 
-const horarios: HorarioBus[] = [
-  {
-    id: 1,
-    bus: "Bus 001",
-    placa: "ABC-123",
-    origen: "Sucre",
-    destino: "La Paz",
-    horaSalida: "06:00",
-    horaLlegada: "14:00",
-    estado: "Programado",
-  },
-  {
-    id: 2,
-    bus: "Bus 002",
-    placa: "DEF-456",
-    origen: "Sucre",
-    destino: "Cochabamba",
-    horaSalida: "08:30",
-    horaLlegada: "15:30",
-    estado: "En ruta",
-  },
-  {
-    id: 3,
-    bus: "Bus 003",
-    placa: "GHI-789",
-    origen: "Sucre",
-    destino: "Santa Cruz",
-    horaSalida: "10:00",
-    horaLlegada: "18:00",
-    estado: "Programado",
-  },
-  {
-    id: 4,
-    bus: "Bus 004",
-    placa: "JKL-012",
-    origen: "Sucre",
-    destino: "Potosí",
-    horaSalida: "15:00",
-    horaLlegada: "18:30",
-    estado: "Finalizado",
-  },
-];
+type HorarioBusesTableProps = {
+  horarios: HorarioBus[];
+  busqueda: string;
+  onBusqueda: (valor: string) => void;
+  onEditar: (horario: HorarioBus) => void;
+  onEliminar: (id: number) => void;
+};
 
-function HorarioBusesTable() {
+function HorarioBusesTable({
+  horarios,
+  busqueda,
+  onBusqueda,
+  onEditar,
+  onEliminar,
+}: HorarioBusesTableProps) {
   return (
     <section className="dashboard-panel">
       <h2>Horario Buses</h2>
@@ -64,6 +35,8 @@ function HorarioBusesTable() {
       <input
         type="text"
         placeholder="Buscar horario..."
+        value={busqueda}
+        onChange={(event) => onBusqueda(event.target.value)}
       />
 
       <table>
@@ -81,27 +54,33 @@ function HorarioBusesTable() {
         </thead>
 
         <tbody>
-          {horarios.map((horario) => (
-            <tr key={horario.id}>
-              <td>{horario.bus}</td>
-              <td>{horario.placa}</td>
-              <td>{horario.origen}</td>
-              <td>{horario.destino}</td>
-              <td>{horario.horaSalida}</td>
-              <td>{horario.horaLlegada}</td>
-              <td>{horario.estado}</td>
-
-              <td>
-                <button type="button">
-                  Editar
-                </button>
-
-                <button type="button">
-                  Eliminar
-                </button>
-              </td>
+          {horarios.length === 0 ? (
+            <tr>
+              <td colSpan={8}>No se encontraron horarios.</td>
             </tr>
-          ))}
+          ) : (
+            horarios.map((horario) => (
+              <tr key={horario.id}>
+                <td>{horario.bus}</td>
+                <td>{horario.placa}</td>
+                <td>{horario.origen}</td>
+                <td>{horario.destino}</td>
+                <td>{horario.horaSalida}</td>
+                <td>{horario.horaLlegada}</td>
+                <td>{horario.estado}</td>
+
+                <td>
+                  <button type="button" onClick={() => onEditar(horario)}>
+                    Editar
+                  </button>
+
+                  <button type="button" onClick={() => onEliminar(horario.id)}>
+                    Eliminar
+                  </button>
+                </td>
+              </tr>
+            ))
+          )}
         </tbody>
       </table>
     </section>
