@@ -6,7 +6,7 @@ type AutobusesHeaderProps = {
 
 function AutobusesHeader({ onNuevoAutobus }: AutobusesHeaderProps) {
   return (
-    <header className="dashboard-header autobuses-header">
+    <header className="dashboard-header">
       <div>
         <h1>Autobuses</h1>
         <p>Gestión y administración de los autobuses</p>
