@@ -5,6 +5,7 @@ import DashboardSidebar from "../dashboard/DashboardSidebar";
 import AutobusesHeader from "./AutobusesHeader";
 import AutobusesTable, { type Autobus } from "./AutobusesTable";
 import { authRepository } from "../../repositories/authRepository";
+import "./autobuses.css";
 
 type AutobusesHomeProps = {
   onLogout: () => void;
