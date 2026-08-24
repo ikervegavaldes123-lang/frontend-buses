@@ -1,6 +1,10 @@
 // src/components/horario-buses/HorarioBusesHeader.tsx
 
-function HorarioBusesHeader() {
+type HorarioBusesHeaderProps = {
+  onNuevoHorario: () => void;
+};
+
+function HorarioBusesHeader({ onNuevoHorario }: HorarioBusesHeaderProps) {
   return (
     <header className="dashboard-header">
       <div>
@@ -11,6 +15,7 @@ function HorarioBusesHeader() {
       <button
         className="add-driver-button"
         type="button"
+        onClick={onNuevoHorario}
       >
         + Nuevo Horario
       </button>
