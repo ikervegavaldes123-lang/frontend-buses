@@ -1,6 +1,10 @@
 // src/components/asientos/AsientosHeader.tsx
 
-function AsientosHeader() {
+type AsientosHeaderProps = {
+  onNuevoAsiento: () => void;
+};
+
+function AsientosHeader({ onNuevoAsiento }: AsientosHeaderProps) {
   return (
     <header className="dashboard-header">
       <div>
@@ -11,6 +15,7 @@ function AsientosHeader() {
       <button
         className="add-driver-button"
         type="button"
+        onClick={onNuevoAsiento}
       >
         + Nuevo Asiento
       </button>
