@@ -1,8 +1,12 @@
 // src/components/autobuses/AutobusesHeader.tsx
 
-function AutobusesHeader() {
+type AutobusesHeaderProps = {
+  onNuevoAutobus: () => void;
+};
+
+function AutobusesHeader({ onNuevoAutobus }: AutobusesHeaderProps) {
   return (
-    <header className="dashboard-header">
+    <header className="dashboard-header autobuses-header">
       <div>
         <h1>Autobuses</h1>
         <p>Gestión y administración de los autobuses</p>
@@ -11,6 +15,7 @@ function AutobusesHeader() {
       <button
         className="add-driver-button"
         type="button"
+        onClick={onNuevoAutobus}
       >
         + Nuevo Autobús
       </button>
