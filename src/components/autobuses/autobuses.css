@@ -1,0 +1,265 @@
+.autobuses-header {
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.autobuses-header h1::before {
+  content: "🚌";
+  display: inline-grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  margin-right: 11px;
+  vertical-align: middle;
+  border-radius: 12px;
+  background: #eaf0ff;
+  font-size: 20px;
+}
+
+.autobuses-header .add-driver-button {
+  padding: 11px 18px;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(23, 73, 209, .18);
+}
+
+.autobuses-panel {
+  min-height: 0;
+  margin-top: 2px;
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(31, 55, 88, .06);
+}
+
+.autobuses-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 20px 22px 14px;
+}
+
+.autobuses-panel-header h2 {
+  padding: 0;
+  margin: 3px 0 4px;
+  font-size: 16px;
+}
+
+.autobuses-panel-header p {
+  margin: 0;
+  color: #8a95a5;
+  font-size: 10px;
+}
+
+.section-eyebrow {
+  color: #1749d1;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 1.3px;
+}
+
+.autobuses-count {
+  min-width: 82px;
+  padding: 9px 12px;
+  border: 1px solid #e2e8f2;
+  border-radius: 11px;
+  background: #f8faff;
+  text-align: center;
+}
+
+.autobuses-count strong {
+  display: block;
+  color: #1749d1;
+  font-size: 19px;
+  line-height: 1;
+}
+
+.autobuses-count span {
+  display: block;
+  margin-top: 4px;
+  color: #8a95a5;
+  font-size: 8px;
+}
+
+.autobuses-toolbar {
+  display: flex;
+  align-items: center;
+  padding: 0 22px 16px;
+}
+
+.autobus-search {
+  width: min(100%, 340px);
+  height: 39px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px;
+  border: 1px solid #e1e7f0;
+  border-radius: 10px;
+  background: #f9fbfd;
+  transition: .18s ease;
+}
+
+.autobus-search:focus-within {
+  border-color: #1749d1;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(23, 73, 209, .08);
+}
+
+.autobus-search span {
+  color: #7d8ba0;
+  font-size: 19px;
+  transform: rotate(-15deg);
+}
+
+.autobus-search input {
+  width: 100%;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #26344c;
+  font-size: 10px;
+}
+
+.autobus-search input::placeholder {
+  color: #a0a9b7;
+}
+
+.autobuses-table-wrapper {
+  border-top: 1px solid #edf0f5;
+}
+
+.autobuses-table {
+  width: 100%;
+  min-width: 760px;
+  border-collapse: collapse;
+}
+
+.autobuses-table th {
+  padding: 11px 14px;
+  border-bottom: 1px solid #e8edf3;
+  color: #8190a5;
+  background: #fafbfc;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: .6px;
+  text-align: left;
+}
+
+.autobuses-table td {
+  padding: 13px 14px;
+  border-bottom: 1px solid #edf1f5;
+  color: #657287;
+  font-size: 10px;
+  background: #fff;
+}
+
+.autobuses-table tbody tr {
+  transition: .15s ease;
+}
+
+.autobuses-table tbody tr:hover td {
+  background: #f8faff;
+}
+
+.bus-plate {
+  display: inline-block;
+  padding: 6px 9px;
+  border: 1px solid #dfe6ef;
+  border-radius: 7px;
+  color: #26344c;
+  background: #f7f9fc;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .4px;
+}
+
+.bus-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #2c3a51;
+}
+
+.bus-brand strong {
+  font-size: 10px;
+}
+
+.bus-icon {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  background: #edf2ff;
+  font-size: 13px;
+}
+
+.autobuses-table .status-badge {
+  padding: 6px 9px;
+  font-size: 8px;
+}
+
+.autobuses-table .status-badge i {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.autobus-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.autobus-actions button {
+  border: 0;
+  border-radius: 7px;
+  padding: 7px 9px;
+  font-size: 8px;
+  font-weight: 800;
+  transition: .15s ease;
+}
+
+.autobus-edit {
+  color: #1749d1;
+  background: #edf2ff;
+}
+
+.autobus-edit:hover {
+  background: #dce6ff;
+  transform: translateY(-1px);
+}
+
+.autobus-delete {
+  color: #b42318;
+  background: #fff0ee;
+}
+
+.autobus-delete:hover {
+  background: #ffe0dc;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 560px) {
+  .autobuses-header {
+    align-items: flex-start;
+  }
+
+  .autobuses-header h1::before {
+    width: 32px;
+    height: 32px;
+    margin-right: 7px;
+    font-size: 16px;
+  }
+
+  .autobuses-panel-header {
+    padding: 16px 14px 12px;
+  }
+
+  .autobuses-toolbar {
+    padding: 0 14px 13px;
+  }
+
+  .autobuses-count {
+    min-width: 65px;
+  }
+}
