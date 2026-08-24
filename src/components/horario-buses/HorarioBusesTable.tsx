@@ -27,62 +27,145 @@ function HorarioBusesTable({
   onEliminar,
 }: HorarioBusesTableProps) {
   return (
-    <section className="dashboard-panel">
-      <h2>Horario Buses</h2>
+    <section className="dashboard-panel horario-panel">
+      <div className="horario-panel-header">
+        <div>
+          <span className="horario-eyebrow">OPERACIONES</span>
+          <h2>Horarios de Buses</h2>
+          <p>Control de salidas y llegadas programadas</p>
+        </div>
 
-      <p>Horarios de salida y llegada de los buses</p>
+        <div className="horario-count">
+          <strong>{horarios.length}</strong>
+          <span>{busqueda ? "encontrados" : "horarios"}</span>
+        </div>
+      </div>
 
-      <input
-        type="text"
-        placeholder="Buscar horario..."
-        value={busqueda}
-        onChange={(event) => onBusqueda(event.target.value)}
-      />
+      <div className="horario-toolbar">
+        <div className="horario-search">
+          <span>⌕</span>
+          <input
+            type="text"
+            placeholder="Buscar horario, bus, placa, origen o destino..."
+            value={busqueda}
+            onChange={(event) => onBusqueda(event.target.value)}
+            aria-label="Buscar horario"
+          />
+          {busqueda && (
+            <button
+              type="button"
+              className="horario-search-clear"
+              onClick={() => onBusqueda("")}
+              aria-label="Limpiar búsqueda"
+            >
+              ×
+            </button>
+          )}
+        </div>
+      </div>
 
-      <table>
-        <thead>
-          <tr>
-            <th>Bus</th>
-            <th>Placa</th>
-            <th>Origen</th>
-            <th>Destino</th>
-            <th>Hora Salida</th>
-            <th>Hora Llegada</th>
-            <th>Estado</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {horarios.length === 0 ? (
+      <div className="table-wrapper horario-table-wrapper">
+        <table className="horario-table">
+          <thead>
             <tr>
-              <td colSpan={8}>No se encontraron horarios.</td>
+              <th>BUS</th>
+              <th>PLACA</th>
+              <th>RUTA</th>
+              <th>SALIDA</th>
+              <th>LLEGADA</th>
+              <th>ESTADO</th>
+              <th>ACCIONES</th>
             </tr>
-          ) : (
-            horarios.map((horario) => (
-              <tr key={horario.id}>
-                <td>{horario.bus}</td>
-                <td>{horario.placa}</td>
-                <td>{horario.origen}</td>
-                <td>{horario.destino}</td>
-                <td>{horario.horaSalida}</td>
-                <td>{horario.horaLlegada}</td>
-                <td>{horario.estado}</td>
+          </thead>
 
-                <td>
-                  <button type="button" onClick={() => onEditar(horario)}>
-                    Editar
-                  </button>
-
-                  <button type="button" onClick={() => onEliminar(horario.id)}>
-                    Eliminar
-                  </button>
+          <tbody>
+            {horarios.length === 0 ? (
+              <tr>
+                <td colSpan={7} className="horario-empty">
+                  <span>🕐</span>
+                  <strong>{busqueda ? "No se encontraron horarios" : "No hay horarios registrados"}</strong>
+                  <small>
+                    {busqueda
+                      ? `No hay resultados para “${busqueda}”.`
+                      : "Agrega un nuevo horario para comenzar."}
+                  </small>
                 </td>
               </tr>
-            ))
-          )}
-        </tbody>
-      </table>
+            ) : (
+              horarios.map((horario) => (
+                <tr key={horario.id}>
+                  <td>
+                    <div className="horario-bus-cell">
+                      <span className="horario-bus-icon">🚌</span>
+                      <strong>{horario.bus}</strong>
+                    </div>
+                  </td>
+
+                  <td>
+                    <span className="horario-plate">{horario.placa}</span>
+                  </td>
+
+                  <td>
+                    <div className="route-cell">
+                      <strong>{horario.origen}</strong>
+                      <span className="route-arrow">→</span>
+                      <strong>{horario.destino}</strong>
+                    </div>
+                  </td>
+
+                  <td>
+                    <div className="time-cell">
+                      <span>Salida</span>
+                      <strong>{horario.horaSalida}</strong>
+                    </div>
+                  </td>
+
+                  <td>
+                    <div className="time-cell">
+                      <span>Llegada</span>
+                      <strong>{horario.horaLlegada}</strong>
+                    </div>
+                  </td>
+
+                  <td>
+                    <span
+                      className={`horario-status ${
+                        horario.estado === "Programado"
+                          ? "programado"
+                          : horario.estado === "En ruta"
+                            ? "ruta"
+                            : "finalizado"
+                      }`}
+                    >
+                      <i />
+                      {horario.estado}
+                    </span>
+                  </td>
+
+                  <td>
+                    <div className="horario-actions">
+                      <button
+                        type="button"
+                        className="horario-edit"
+                        onClick={() => onEditar(horario)}
+                      >
+                        ✎ Editar
+                      </button>
+                      <button
+                        type="button"
+                        className="horario-delete"
+                        onClick={() => onEliminar(horario.id)}
+                      >
+                        × Eliminar
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
+      </div>
     </section>
   );
 }
