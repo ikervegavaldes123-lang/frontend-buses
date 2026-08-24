@@ -6,18 +6,15 @@ type AsientosHeaderProps = {
 
 function AsientosHeader({ onNuevoAsiento }: AsientosHeaderProps) {
   return (
-    <header className="dashboard-header">
+    <header className="dashboard-header asientos-header">
       <div>
         <h1>Asientos</h1>
         <p>Gestión y administración de asientos de los buses</p>
       </div>
 
-      <button
-        className="add-driver-button"
-        type="button"
-        onClick={onNuevoAsiento}
-      >
-        + Nuevo Asiento
+      <button className="add-driver-button asientos-add-button" type="button" onClick={onNuevoAsiento}>
+        <span>＋</span>
+        Nuevo Asiento
       </button>
     </header>
   );
