@@ -1,5 +1,7 @@
 // src/components/autobuses/AutobusesTable.tsx
 
+import { useMemo, useState } from "react";
+
 export type Autobus = {
   id: number;
   placa: string;
@@ -16,6 +18,24 @@ type AutobusesTableProps = {
 };
 
 function AutobusesTable({ autobuses, onEditar, onEliminar }: AutobusesTableProps) {
+  const [busqueda, setBusqueda] = useState("");
+
+  const autobusesFiltrados = useMemo(() => {
+    const texto = busqueda.trim().toLowerCase();
+
+    if (!texto) return autobuses;
+
+    return autobuses.filter((autobus) =>
+      [
+        autobus.placa,
+        autobus.marca,
+        autobus.modelo,
+        autobus.capacidad.toString(),
+        autobus.estado,
+      ].some((valor) => valor.toLowerCase().includes(texto))
+    );
+  }, [autobuses, busqueda]);
+
   return (
     <section className="dashboard-panel autobuses-panel">
       <div className="autobuses-panel-header">
@@ -25,15 +45,31 @@ function AutobusesTable({ autobuses, onEditar, onEliminar }: AutobusesTableProps
           <p>Autobuses registrados en el sistema</p>
         </div>
         <div className="autobuses-count">
-          <strong>{autobuses.length}</strong>
-          <span>registrados</span>
+          <strong>{autobusesFiltrados.length}</strong>
+          <span>{busqueda ? "encontrados" : "registrados"}</span>
         </div>
       </div>
 
       <div className="autobuses-toolbar">
         <div className="autobus-search">
           <span>⌕</span>
-          <input type="text" placeholder="Buscar autobús..." />
+          <input
+            type="text"
+            placeholder="Buscar autobús..."
+            value={busqueda}
+            onChange={(event) => setBusqueda(event.target.value)}
+            aria-label="Buscar autobús"
+          />
+          {busqueda && (
+            <button
+              type="button"
+              className="search-clear"
+              onClick={() => setBusqueda("")}
+              aria-label="Limpiar búsqueda"
+            >
+              ×
+            </button>
+          )}
         </div>
       </div>
 
@@ -51,14 +87,16 @@ function AutobusesTable({ autobuses, onEditar, onEliminar }: AutobusesTableProps
           </thead>
 
           <tbody>
-            {autobuses.length === 0 ? (
+            {autobusesFiltrados.length === 0 ? (
               <tr>
                 <td colSpan={6} className="empty-table">
-                  No hay autobuses registrados.
+                  {busqueda
+                    ? `No se encontraron autobuses para “${busqueda}”.`
+                    : "No hay autobuses registrados."}
                 </td>
               </tr>
             ) : (
-              autobuses.map((autobus) => (
+              autobusesFiltrados.map((autobus) => (
                 <tr key={autobus.id}>
                   <td>
                     <span className="bus-plate">{autobus.placa}</span>
