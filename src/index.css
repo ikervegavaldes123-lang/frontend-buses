@@ -92,3 +92,31 @@ button { cursor: pointer; }
 @media (max-width:900px) { .stats-grid { grid-template-columns: repeat(2,1fr); } .dashboard-grid { grid-template-columns: 1fr; } }
 @media (max-width:760px) { .dashboard-layout { width:100%; min-height:100vh; margin:0; border:0; border-radius:0; } .dashboard-sidebar { width:175px; min-width:175px; } .dashboard-content { padding:24px 20px; } }
 @media (max-width:560px) { .dashboard-layout { display:block; } .dashboard-sidebar { width:100%; min-width:0; min-height:auto; padding:15px; } .sidebar-brand { padding-bottom:12px; } .sidebar-nav { display:grid; grid-template-columns:repeat(2,1fr); } .dashboard-content { padding:20px 12px; } .dashboard-main-header { display:block; } .dashboard-welcome { margin-bottom:18px; } .stats-grid { grid-template-columns:1fr 1fr; gap:9px; } .stat-card { padding:13px; } .stat-card strong { font-size:19px; } .performance-header { display:block; } .performance-period { display:inline-block; margin-top:10px; } .performance-panel { padding-left:14px; padding-right:14px; } }
+
+/* Carnets de identidad de choferes */
+.driver-cards-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:18px}
+.driver-id-card{position:relative;overflow:hidden;border:1px solid #dce5f2;border-radius:18px;background:linear-gradient(145deg,#fff 0%,#f7faff 100%);box-shadow:0 8px 24px rgba(31,55,88,.07);transition:.2s ease}
+.driver-id-card:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(31,55,88,.12);border-color:#bfcff0}
+.driver-id-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;color:#fff;background:linear-gradient(135deg,#071b3d,#1749d1)}
+.driver-id-brand{display:flex;align-items:center;gap:10px}
+.driver-id-emblem{width:34px;height:34px;display:grid;place-items:center;border-radius:9px;background:rgba(255,255,255,.14);font-size:18px}
+.driver-id-brand strong,.driver-id-brand small{display:block}
+.driver-id-brand strong{font-size:10px;letter-spacing:.4px}
+.driver-id-brand small{margin-top:3px;color:#b9c9e7;font-size:7px;letter-spacing:1px}
+.driver-id-top .status-badge{flex-shrink:0}
+.driver-id-body{display:flex;gap:15px;padding:19px 18px 15px}
+.driver-avatar{width:72px;height:88px;flex-shrink:0;display:grid;place-items:center;border:3px solid #e3eaf7;border-radius:10px;color:#1749d1;background:linear-gradient(145deg,#edf2ff,#dce7ff);font-size:22px;font-weight:800}
+.driver-id-info{min-width:0;flex:1}
+.driver-id-label{display:block;margin-bottom:4px;color:#8793a7;font-size:7px;font-weight:800;letter-spacing:.8px}
+.driver-id-info>strong{display:block;overflow:hidden;color:#18263e;font-size:14px;text-overflow:ellipsis;white-space:nowrap}
+.driver-id-data{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+.driver-id-data strong{color:#33425b;font-size:10px}
+.driver-id-contact{display:flex;justify-content:space-between;gap:10px;padding:11px 18px;border-top:1px solid #edf0f5;border-bottom:1px solid #edf0f5;color:#69768a;font-size:9px}
+.driver-id-actions{display:flex;justify-content:flex-end;gap:7px;padding:11px 18px 14px}
+.driver-id-actions button{border:0;border-radius:7px;padding:7px 10px;font-size:9px;font-weight:700}
+.empty-driver-cards{min-height:240px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;padding:30px;color:#7c8799;text-align:center}
+.empty-driver-icon{font-size:42px;margin-bottom:4px}
+.empty-driver-cards strong{color:#26344c;font-size:13px}
+.empty-driver-cards span{font-size:10px}
+@media (max-width:900px){.driver-cards-grid{grid-template-columns:1fr}}
+@media (max-width:560px){.driver-cards-grid{padding:12px;gap:12px}.driver-id-body{padding:15px}.driver-avatar{width:62px;height:78px}.driver-id-contact{flex-direction:column}}
