@@ -1,12 +1,32 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { authRepository } from "../repositories/authRepository";
+import { useEffect } from "react";
 import "./ChoferDashboardPage.css";
 
 function ChoferDashboardPage() {
   const navigate = useNavigate();
   const user = authRepository.getCurrentUser();
   const [section, setSection] = useState<"inicio" | "viajes" | "perfil">("inicio");
+  const [misViajes, setMisViajes] = useState<Array<{ id: number; bus: string; placa: string; origen: string; destino: string; horaSalida: string; horaLlegada: string; estado: string; choferCarnet?: string }>>([]);
+
+  useEffect(() => {
+    const cargarMisViajes = () => {
+      try {
+        const datos = JSON.parse(localStorage.getItem("frontend-buses-horarios") ?? "[]");
+        setMisViajes(Array.isArray(datos) ? datos.filter((viaje) => viaje.choferCarnet === user?.carnet) : []);
+      } catch {
+        setMisViajes([]);
+      }
+    };
+    cargarMisViajes();
+    window.addEventListener("storage", cargarMisViajes);
+    window.addEventListener("focus", cargarMisViajes);
+    return () => {
+      window.removeEventListener("storage", cargarMisViajes);
+      window.removeEventListener("focus", cargarMisViajes);
+    };
+  }, [user?.carnet]);
 
   const handleLogout = () => {
     authRepository.logout();
@@ -41,7 +61,7 @@ function ChoferDashboardPage() {
           <section className="driver-information-panel"><div className="driver-section-heading"><div><h2>Información de la cuenta</h2><p>Datos asociados a tu sesión actual</p></div><span className="driver-account-badge">● Cuenta activa</span></div><div className="driver-info-row"><span>Nombre completo</span><strong>{user?.name ?? "No disponible"}</strong></div><div className="driver-info-row"><span>Carnet de identidad</span><strong>{user?.carnet ?? "No disponible"}</strong></div><div className="driver-info-row"><span>Tipo de acceso</span><strong>Chofer</strong></div></section>
         </>}
 
-        {section === "viajes" && <section className="driver-information-panel driver-trips-panel"><div className="driver-section-heading"><div><h2>Mis viajes asignados</h2><p>Consulta aquí tus próximos turnos y rutas.</p></div><span className="driver-trip-icon">🗓️</span></div><div className="driver-empty-trips"><span>🚌</span><strong>No hay viajes para mostrar todavía</strong><p>Cuando el administrador registre y asigne un turno a tu cuenta, aparecerá en esta sección.</p></div></section>}
+        {section === "viajes" && <section className="driver-information-panel driver-trips-panel"><div className="driver-section-heading"><div><h2>Mis viajes asignados</h2><p>Consulta aquí tus próximos turnos y rutas.</p></div><span className="driver-trip-icon">🗓️</span></div>{misViajes.length === 0 ? <div className="driver-empty-trips"><span>🚌</span><strong>No hay viajes para mostrar todavía</strong><p>Cuando el administrador registre y asigne un turno a tu cuenta, aparecerá en esta sección.</p></div> : misViajes.map((viaje) => <div key={viaje.id} className="driver-info-row"><span>🚌 {viaje.bus} · {viaje.placa}<br />{viaje.origen} → {viaje.destino}</span><strong>Salida {viaje.horaSalida} · Llegada {viaje.horaLlegada}<br />{viaje.estado}</strong></div>)}</section>}
 
         {section === "perfil" && <section className="driver-information-panel"><div className="driver-section-heading"><div><h2>Mi perfil</h2><p>Información básica de tu cuenta de chofer.</p></div><span className="driver-profile-icon">♙</span></div><div className="driver-profile-summary"><div className="driver-profile-avatar">{user?.name?.charAt(0).toUpperCase() ?? "C"}</div><div><strong>{user?.name ?? "Chofer"}</strong><span>Usuario de transporte</span></div></div><div className="driver-info-row"><span>Carnet de identidad</span><strong>{user?.carnet ?? "No disponible"}</strong></div><div className="driver-info-row"><span>Rol de usuario</span><strong>Chofer</strong></div><div className="driver-info-row"><span>Estado de sesión</span><strong className="driver-session-active">Activa</strong></div></section>}
         <footer className="driver-portal-footer">Sistema de Gestión de Transporte <span>•</span> Área exclusiva para choferes</footer>
