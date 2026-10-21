@@ -5,6 +5,7 @@ import DashboardSidebar from "../dashboard/DashboardSidebar";
 import HorarioBusesHeader from "./HorarioBusesHeader";
 import HorarioBusesTable, { type HorarioBus } from "./HorarioBusesTable";
 import { authRepository } from "../../repositories/authRepository";
+import usersData from "../../data/users.json";
 import "./horario-buses.css";
 
 type HorarioBusesHomeProps = {
@@ -12,6 +13,7 @@ type HorarioBusesHomeProps = {
 };
 
 const HORARIOS_STORAGE_KEY = "frontend-buses-horarios";
+const usuariosChoferes = (usersData as { id: string; name: string; carnet: string; role: string }[]).filter((usuario) => usuario.role === "USUARIO" || usuario.role === "CHOFER");
 
 const horariosIniciales: HorarioBus[] = [
   { id: 1, bus: "Bus 001", placa: "ABC-123", origen: "Sucre", destino: "La Paz", horaSalida: "06:00", horaLlegada: "14:00", estado: "Programado" },
@@ -106,6 +108,7 @@ function HorarioBusesHome({ onLogout }: HorarioBusesHomeProps) {
               horaSalida: String(formData.get("horaSalida") ?? ""),
               horaLlegada: String(formData.get("horaLlegada") ?? ""),
               estado: (formData.get("estado") ?? "Programado") as HorarioBus["estado"],
+              choferCarnet: String(formData.get("choferCarnet") ?? ""),
             });
           }}>
             <div className="driver-form-header">
@@ -122,6 +125,7 @@ function HorarioBusesHome({ onLogout }: HorarioBusesHomeProps) {
             <label>Destino<input name="destino" type="text" defaultValue={horarioEditando?.destino ?? ""} placeholder="Ej. La Paz" required /></label>
             <label>Hora de salida<input name="horaSalida" type="time" defaultValue={horarioEditando?.horaSalida ?? ""} required /></label>
             <label>Hora de llegada<input name="horaLlegada" type="time" defaultValue={horarioEditando?.horaLlegada ?? ""} required /></label>
+            <label>Asignar chofer<select name="choferCarnet" defaultValue={horarioEditando?.choferCarnet ?? ""} required><option value="" disabled>Selecciona un chofer</option>{usuariosChoferes.map((chofer) => <option key={chofer.id} value={chofer.carnet}>{chofer.name} — CI {chofer.carnet}</option>)}</select></label>
             <label>Estado<select name="estado" defaultValue={horarioEditando?.estado ?? "Programado"}><option value="Programado">Programado</option><option value="En ruta">En ruta</option><option value="Finalizado">Finalizado</option></select></label>
 
             <div className="driver-form-actions">
