@@ -9,6 +9,7 @@ export type HorarioBus = {
   horaSalida: string;
   horaLlegada: string;
   estado: "Programado" | "En ruta" | "Finalizado";
+  choferCarnet?: string;
 };
 
 type HorarioBusesTableProps = {
@@ -74,6 +75,7 @@ function HorarioBusesTable({
               <th>SALIDA</th>
               <th>LLEGADA</th>
               <th>ESTADO</th>
+              <th>CHOFER ASIGNADO</th>
               <th>ACCIONES</th>
             </tr>
           </thead>
@@ -81,7 +83,7 @@ function HorarioBusesTable({
           <tbody>
             {horarios.length === 0 ? (
               <tr>
-                <td colSpan={7} className="horario-empty">
+                <td colSpan={8} className="horario-empty">
                   <span>🕐</span>
                   <strong>{busqueda ? "No se encontraron horarios" : "No hay horarios registrados"}</strong>
                   <small>
@@ -142,6 +144,7 @@ function HorarioBusesTable({
                     </span>
                   </td>
 
+                  <td><span className="horario-plate">{horario.choferCarnet ?? "Sin asignar"}</span></td>
                   <td>
                     <div className="horario-actions">
                       <button
