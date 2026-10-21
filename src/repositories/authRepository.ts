@@ -33,7 +33,17 @@ export const authRepository = {
   },
 
   getCurrentUser(): User | null {
-    return storageService.get<User>(SESSION_KEY);
+    const savedUser = storageService.get<User>(SESSION_KEY);
+    if (!savedUser) return null;
+
+    // Compatibility with sessions created before the role selector existed.
+    if ((savedUser.role as string) === "USUARIO") {
+      const normalizedUser: User = { ...savedUser, role: "CHOFER" };
+      storageService.set<User>(SESSION_KEY, normalizedUser);
+      return normalizedUser;
+    }
+
+    return savedUser;
   },
 
   isAuthenticated(): boolean {
