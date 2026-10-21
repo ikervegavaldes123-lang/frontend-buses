@@ -3,15 +3,16 @@ import { storageService } from "../services/storageService";
 import type { LoginCredentials, User, UserRecord } from "../types/auth";
 
 const SESSION_KEY = "app_session";
-const users = initialUsers as UserRecord[];
+const users = initialUsers as unknown as UserRecord[];
 
 export const authRepository = {
   login(credentials: LoginCredentials): User | null {
+    const expectedStoredRole = credentials.role === "CHOFER" ? "USUARIO" : "ADMIN";
     const foundUser = users.find(
       (user) =>
         user.carnet === credentials.carnet &&
         user.password === credentials.password &&
-        user.role === credentials.role
+        (user.role as string) === expectedStoredRole
     );
 
     if (!foundUser) return null;
@@ -20,7 +21,7 @@ export const authRepository = {
       id: foundUser.id,
       name: foundUser.name,
       carnet: foundUser.carnet,
-      role: foundUser.role,
+      role: credentials.role,
     };
 
     storageService.set<User>(SESSION_KEY, sessionUser);
