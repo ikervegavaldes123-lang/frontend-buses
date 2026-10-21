@@ -21,7 +21,20 @@ button { cursor: pointer; }
 .user-info strong, .user-info span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .user-info strong { font-size: 11px; color: #fff; }
 .user-info span { color: #8fa0ba; font-size: 9px; }
-.logout-button { display: none; }
+.logout-button {
+  display: block;
+  grid-column: 2;
+  justify-self: start;
+  margin-top: 6px;
+  padding: 6px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 7px;
+  background: #1749d1;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 600;
+}
+.logout-button:hover { background: #2458e8; }
 .dashboard-content { flex: 1; min-width: 0; padding: 34px; background: #f8faff; }
 .dashboard-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; }
 .dashboard-header h1 { margin: 0; font-size: 26px; line-height: 1.2; letter-spacing: -.7px; color: #15213a; }
