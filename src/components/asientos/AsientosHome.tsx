@@ -11,14 +11,45 @@ type AsientosHomeProps = { onLogout: () => void };
 
 const ASIENTOS_STORAGE_KEY = "frontend-buses-asientos";
 
+
 const asientosIniciales: Asiento[] = [
+  // Bus 001: 10 asientos
   { id: 1, bus: "Bus 001", placa: "ABC-123", numero: 1, tipo: "Preferencial", estado: "Disponible" },
   { id: 2, bus: "Bus 001", placa: "ABC-123", numero: 2, tipo: "Preferencial", estado: "Ocupado" },
   { id: 3, bus: "Bus 001", placa: "ABC-123", numero: 3, tipo: "Normal", estado: "Disponible" },
-  { id: 4, bus: "Bus 002", placa: "DEF-456", numero: 1, tipo: "Preferencial", estado: "Reservado" },
-  { id: 5, bus: "Bus 002", placa: "DEF-456", numero: 2, tipo: "Normal", estado: "Disponible" },
-  { id: 6, bus: "Bus 003", placa: "GHI-789", numero: 1, tipo: "Normal", estado: "Ocupado" },
+  { id: 4, bus: "Bus 001", placa: "ABC-123", numero: 4, tipo: "Normal", estado: "Disponible" },
+  { id: 5, bus: "Bus 001", placa: "ABC-123", numero: 5, tipo: "Normal", estado: "Reservado" },
+  { id: 6, bus: "Bus 001", placa: "ABC-123", numero: 6, tipo: "Normal", estado: "Disponible" },
+  { id: 7, bus: "Bus 001", placa: "ABC-123", numero: 7, tipo: "Normal", estado: "Ocupado" },
+  { id: 8, bus: "Bus 001", placa: "ABC-123", numero: 8, tipo: "Normal", estado: "Disponible" },
+  { id: 9, bus: "Bus 001", placa: "ABC-123", numero: 9, tipo: "Normal", estado: "Disponible" },
+  { id: 10, bus: "Bus 001", placa: "ABC-123", numero: 10, tipo: "Normal", estado: "Disponible" },
+
+  // Bus 002: 10 asientos
+  { id: 11, bus: "Bus 002", placa: "DEF-456", numero: 1, tipo: "Preferencial", estado: "Disponible" },
+  { id: 12, bus: "Bus 002", placa: "DEF-456", numero: 2, tipo: "Preferencial", estado: "Disponible" },
+  { id: 13, bus: "Bus 002", placa: "DEF-456", numero: 3, tipo: "Normal", estado: "Ocupado" },
+  { id: 14, bus: "Bus 002", placa: "DEF-456", numero: 4, tipo: "Normal", estado: "Disponible" },
+  { id: 15, bus: "Bus 002", placa: "DEF-456", numero: 5, tipo: "Normal", estado: "Disponible" },
+  { id: 16, bus: "Bus 002", placa: "DEF-456", numero: 6, tipo: "Normal", estado: "Reservado" },
+  { id: 17, bus: "Bus 002", placa: "DEF-456", numero: 7, tipo: "Normal", estado: "Disponible" },
+  { id: 18, bus: "Bus 002", placa: "DEF-456", numero: 8, tipo: "Normal", estado: "Disponible" },
+  { id: 19, bus: "Bus 002", placa: "DEF-456", numero: 9, tipo: "Normal", estado: "Disponible" },
+  { id: 20, bus: "Bus 002", placa: "DEF-456", numero: 10, tipo: "Normal", estado: "Ocupado" },
+
+  // Bus 003: 10 asientos
+  { id: 21, bus: "Bus 003", placa: "GHI-789", numero: 1, tipo: "Preferencial", estado: "Disponible" },
+  { id: 22, bus: "Bus 003", placa: "GHI-789", numero: 2, tipo: "Preferencial", estado: "Disponible" },
+  { id: 23, bus: "Bus 003", placa: "GHI-789", numero: 3, tipo: "Normal", estado: "Disponible" },
+  { id: 24, bus: "Bus 003", placa: "GHI-789", numero: 4, tipo: "Normal", estado: "Reservado" },
+  { id: 25, bus: "Bus 003", placa: "GHI-789", numero: 5, tipo: "Normal", estado: "Disponible" },
+  { id: 26, bus: "Bus 003", placa: "GHI-789", numero: 6, tipo: "Normal", estado: "Disponible" },
+  { id: 27, bus: "Bus 003", placa: "GHI-789", numero: 7, tipo: "Normal", estado: "Ocupado" },
+  { id: 28, bus: "Bus 003", placa: "GHI-789", numero: 8, tipo: "Normal", estado: "Disponible" },
+  { id: 29, bus: "Bus 003", placa: "GHI-789", numero: 9, tipo: "Normal", estado: "Disponible" },
+  { id: 30, bus: "Bus 003", placa: "GHI-789", numero: 10, tipo: "Normal", estado: "Disponible" },
 ];
+
 
 function cargarAsientos(): Asiento[] {
   try {

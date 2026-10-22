@@ -1,4 +1,3 @@
-// src/components/asientos/AsientosTable.tsx
 
 import { useMemo, useState } from "react";
 
@@ -17,120 +16,255 @@ type AsientosTableProps = {
   onEliminar: (id: number) => void;
 };
 
-function AsientosTable({ asientos, onEditar, onEliminar }: AsientosTableProps) {
+function AsientosTable({
+  asientos,
+  onEditar,
+  onEliminar,
+}: AsientosTableProps) {
   const [busqueda, setBusqueda] = useState("");
-  const [filtroEstado, setFiltroEstado] = useState("Todos");
+  const [busSeleccionado, setBusSeleccionado] = useState("Todos");
+  const [asientoSeleccionado, setAsientoSeleccionado] =
+    useState<number | null>(null);
 
-  const asientosFiltrados = useMemo(() => {
-    const texto = busqueda.toLowerCase().trim();
+  const buses = useMemo(
+    () => [...new Set(asientos.map((a) => a.placa))],
+    [asientos]
+  );
 
-    return asientos.filter((asiento) => {
-      const coincideTexto = !texto ||
-        [asiento.bus, asiento.placa, String(asiento.numero), asiento.tipo, asiento.estado]
-          .some((valor) => valor.toLowerCase().includes(texto));
-      const coincideEstado = filtroEstado === "Todos" || asiento.estado === filtroEstado;
-      return coincideTexto && coincideEstado;
-    });
-  }, [asientos, busqueda, filtroEstado]);
+  const asientosBus = useMemo(
+    () =>
+      asientos.filter(
+        (a) =>
+          busSeleccionado === "Todos" || a.placa === busSeleccionado
+      ),
+    [asientos, busSeleccionado]
+  );
 
-  const disponibles = asientos.filter((a) => a.estado === "Disponible").length;
-  const ocupados = asientos.filter((a) => a.estado === "Ocupado").length;
-  const reservados = asientos.filter((a) => a.estado === "Reservado").length;
+  const filtrados = asientosBus.filter((a) =>
+    `${a.bus} ${a.placa} ${a.numero} ${a.estado}`
+      .toLowerCase()
+      .includes(busqueda.toLowerCase().trim())
+  );
+
+  const seleccionado = asientos.find(
+    (a) => a.id === asientoSeleccionado
+  );
+
+  const disponibles = asientosBus.filter(
+    (a) => a.estado === "Disponible"
+  ).length;
+
+  const ocupados = asientosBus.filter(
+    (a) => a.estado === "Ocupado"
+  ).length;
+
+  const reservados = asientosBus.filter(
+    (a) => a.estado === "Reservado"
+  ).length;
+
+  const claseEstado = (estado: Asiento["estado"]) =>
+    estado.toLowerCase();
 
   return (
     <section className="dashboard-panel asientos-panel">
       <div className="asientos-panel-header">
         <div>
-          <span className="asientos-eyebrow">CONTROL DE PASAJEROS</span>
-          <h2>Gestión de Asientos</h2>
-          <p>Consulta y administra la disponibilidad de los asientos</p>
+          <span className="asientos-eyebrow">
+            ANDES BUS · CONTROL DE ASIENTOS
+          </span>
+          <h2>Asientos</h2>
+          <p>Selecciona un asiento para consultar su información.</p>
         </div>
 
-        <div className="asientos-summary">
-          <div className="seat-summary available"><strong>{disponibles}</strong><span>Disponibles</span></div>
-          <div className="seat-summary occupied"><strong>{ocupados}</strong><span>Ocupados</span></div>
-          <div className="seat-summary reserved"><strong>{reservados}</strong><span>Reservados</span></div>
+        <label className="asientos-bus-select">
+          Autobús
+          <select
+            value={busSeleccionado}
+            onChange={(e) => {
+              setBusSeleccionado(e.target.value);
+              setAsientoSeleccionado(null);
+            }}
+          >
+            <option value="Todos">Todos los autobuses</option>
+            {buses.map((placa) => (
+              <option key={placa} value={placa}>
+                {placa}
+              </option>
+            ))}
+          </select>
+        </label>
+      </div>
+
+      <div className="asientos-summary">
+        <div className="seat-summary available">
+          <strong>{disponibles}</strong>
+          <span>Disponibles</span>
+        </div>
+        <div className="seat-summary occupied">
+          <strong>{ocupados}</strong>
+          <span>Ocupados</span>
+        </div>
+        <div className="seat-summary reserved">
+          <strong>{reservados}</strong>
+          <span>Reservados</span>
         </div>
       </div>
 
-      <div className="asientos-toolbar">
-        <div className="asientos-search">
-          <span>⌕</span>
-          <input
-            type="text"
-            placeholder="Buscar por bus, placa, asiento o estado..."
-            value={busqueda}
-            onChange={(event) => setBusqueda(event.target.value)}
-            aria-label="Buscar asiento"
-          />
-          {busqueda && (
-            <button type="button" className="asientos-clear" onClick={() => setBusqueda("")}>×</button>
-          )}
-        </div>
+      <div className="asientos-prototype">
+        <div className="bus-layout-card">
+          <div className="bus-layout-heading">
+            <div>
+              <span className="asientos-eyebrow">DISTRIBUCIÓN</span>
+              <h3>Mapa del autobús</h3>
+            </div>
+            <span className="bus-steering" title="Parte delantera">
+              VOLANTE ↑
+            </span>
+          </div>
 
-        <select
-          className="asientos-filter"
-          value={filtroEstado}
-          onChange={(event) => setFiltroEstado(event.target.value)}
-          aria-label="Filtrar por estado"
-        >
-          <option value="Todos">Todos los estados</option>
-          <option value="Disponible">Disponibles</option>
-          <option value="Ocupado">Ocupados</option>
-          <option value="Reservado">Reservados</option>
-        </select>
-      </div>
+          <div className="bus-seat-layout">
+            <div className="bus-aisle-label">VENTANILLA</div>
 
-      <div className="seat-legend">
-        <span><i className="legend-seat available-seat" /> Disponible</span>
-        <span><i className="legend-seat occupied-seat" /> Ocupado</span>
-        <span><i className="legend-seat reserved-seat" /> Reservado</span>
-      </div>
+            <div className="bus-seat-grid">
+              {filtrados.map((asiento) => (
+                <button
+                  key={asiento.id}
+                  type="button"
+                  title={`Asiento ${asiento.numero} · ${asiento.estado}`}
+                  aria-pressed={asientoSeleccionado === asiento.id}
+                  className={[
+                    "bus-seat",
+                    claseEstado(asiento.estado),
+                    asientoSeleccionado === asiento.id
+                      ? "selected"
+                      : "",
+                  ].join(" ")}
+                  onClick={() =>
+                    setAsientoSeleccionado(asiento.id)
+                  }
+                >
+                  <span>●</span>
+                  {asiento.numero}
+                </button>
+              ))}
+            </div>
 
-      <div className="table-wrapper asientos-table-wrapper">
-        <table className="asientos-table">
-          <thead>
-            <tr>
-              <th>ASIENTO</th>
-              <th>AUTOBÚS</th>
-              <th>PLACA</th>
-              <th>TIPO</th>
-              <th>ESTADO</th>
-              <th>ACCIONES</th>
-            </tr>
-          </thead>
-          <tbody>
-            {asientosFiltrados.length === 0 ? (
-              <tr>
-                <td colSpan={6} className="asientos-empty">
-                  <span>💺</span>
-                  <strong>No se encontraron asientos</strong>
-                  <small>Prueba con otra búsqueda o cambia el filtro.</small>
-                </td>
-              </tr>
-            ) : (
-              asientosFiltrados.map((asiento) => (
-                <tr key={asiento.id}>
-                  <td>
-                    <div className={`seat-number ${asiento.estado.toLowerCase()}`}>
-                      <span>💺</span><strong>{String(asiento.numero).padStart(2, "0")}</strong>
-                    </div>
-                  </td>
-                  <td><div className="seat-bus"><span>🚌</span><strong>{asiento.bus}</strong></div></td>
-                  <td><span className="seat-plate">{asiento.placa}</span></td>
-                  <td><span className="seat-type">{asiento.tipo}</span></td>
-                  <td><span className={`seat-status ${asiento.estado.toLowerCase()}`}><i />{asiento.estado}</span></td>
-                  <td>
-                    <div className="seat-actions">
-                      <button type="button" className="seat-edit" onClick={() => onEditar(asiento)}>✎ Editar</button>
-                      <button type="button" className="seat-delete" onClick={() => onEliminar(asiento.id)}>× Eliminar</button>
-                    </div>
-                  </td>
-                </tr>
-              ))
+            {filtrados.length === 0 && (
+              <p className="asientos-no-results">
+                No hay asientos para mostrar.
+              </p>
             )}
-          </tbody>
-        </table>
+
+            <div className="bus-aisle-label">VENTANILLA</div>
+          </div>
+
+          <div className="seat-legend">
+            <span>
+              <i className="legend-seat selected-legend" />
+              Seleccionado
+            </span>
+            <span>
+              <i className="legend-seat available-seat" />
+              Disponible
+            </span>
+            <span>
+              <i className="legend-seat occupied-seat" />
+              Ocupado
+            </span>
+            <span>
+              <i className="legend-seat reserved-seat" />
+              Reservado
+            </span>
+          </div>
+        </div>
+
+        <aside className="seat-information">
+          <div className="seat-info-title">
+            <span className="asientos-eyebrow">DETALLES</span>
+            <h3>Información del asiento</h3>
+          </div>
+
+          {seleccionado ? (
+            <>
+              <div className="seat-info-number">
+                <span>💺</span>
+                <div>
+                  <small>Asiento número</small>
+                  <strong>
+                    {String(seleccionado.numero).padStart(2, "0")}
+                  </strong>
+                </div>
+              </div>
+
+              <dl className="seat-info-list">
+                <div>
+                  <dt>Autobús</dt>
+                  <dd>{seleccionado.bus}</dd>
+                </div>
+                <div>
+                  <dt>Placa</dt>
+                  <dd>{seleccionado.placa}</dd>
+                </div>
+                <div>
+                  <dt>Tipo</dt>
+                  <dd>{seleccionado.tipo}</dd>
+                </div>
+                <div>
+                  <dt>Estado</dt>
+                  <dd>
+                    <span
+                      className={`seat-status ${claseEstado(
+                        seleccionado.estado
+                      )}`}
+                    >
+                      {seleccionado.estado}
+                    </span>
+                  </dd>
+                </div>
+              </dl>
+
+              <div className="seat-info-actions">
+                <button
+                  type="button"
+                  className="seat-edit"
+                  onClick={() => onEditar(seleccionado)}
+                >
+                  ✎ Editar
+                </button>
+                <button
+                  type="button"
+                  className="seat-delete"
+                  onClick={() => onEliminar(seleccionado.id)}
+                >
+                  × Eliminar
+                </button>
+              </div>
+            </>
+          ) : (
+            <div className="seat-info-empty">
+              <span>💺</span>
+              <p>Selecciona un asiento del mapa para ver sus datos.</p>
+            </div>
+          )}
+
+          <div className="seat-info-note">
+            <strong>Nota</strong>
+            <p>
+              Los colores indican el estado registrado de cada asiento.
+            </p>
+          </div>
+        </aside>
+      </div>
+
+      <div className="asientos-search-footer">
+        <label htmlFor="buscar-asiento">Buscar asiento</label>
+        <input
+          id="buscar-asiento"
+          type="search"
+          placeholder="Buscar por número, autobús o placa..."
+          value={busqueda}
+          onChange={(e) => setBusqueda(e.target.value)}
+        />
       </div>
     </section>
   );
