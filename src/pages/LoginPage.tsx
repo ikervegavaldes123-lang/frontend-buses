@@ -28,18 +28,18 @@ function LoginPage() {
     <main className="login-page">
       <section className="login-visual">
         <div className="login-brand">
-          <span className="login-brand-icon" aria-hidden="true">AB</span>
-          <div><strong>ANDES BUS</strong><small>SUCRE · BOLIVIA</small></div>
+          <span className="login-brand-icon" aria-hidden="true">✦</span>
+          <div><strong>Andes Bus</strong><small>SUCRE · BOLIVIA</small></div>
         </div>
 
         <div className="login-visual-copy">
-          <span className="login-kicker">CONECTANDO DESTINOS</span>
-          <h1>Tu viaje comienza<br /><em>con una buena gestión.</em></h1>
-          <p>Administra choferes, horarios, autobuses y pasajes desde una sola plataforma de transporte.</p>
+          <span className="login-kicker">TRANSPORTE · CONFIANZA · CALIDAD</span>
+          <h1>Tu destino,<br /><em>nuestra ruta.</em></h1>
+          <p>Gestiona choferes, autobuses, horarios y pasajes desde la plataforma de Andes Bus.</p>
           <div className="login-route-decoration" aria-hidden="true">
             <span className="route-dot" />
             <span className="route-line" />
-            <span className="route-bus">🚌</span>
+            <span className="route-bus">✦</span>
             <span className="route-line route-line-short" />
             <span className="route-dot route-dot-end" />
           </div>
