@@ -7,6 +7,7 @@ import ChoferesPage from "./pages/ChoferesPage";
 import AutobusesPage from "./pages/AutobusesPage";
 import HorarioBusesPage from "./pages/HorarioBusesPage";
 import AsientosPage from "./pages/AsientosPage";
+import ClientePage from "./pages/ClientePage";
 import { authRepository } from "./repositories/authRepository";
 import type { UserRole } from "./types/auth";
 
@@ -24,6 +25,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/cliente" element={<ClientePage />} />
         <Route path="/" element={<RoleRoute role="ADMIN"><HomePage /></RoleRoute>} />
         <Route path="/chofer" element={<RoleRoute role="CHOFER"><ChoferDashboardPage /></RoleRoute>} />
         <Route path="/choferes" element={<RoleRoute role="ADMIN"><ChoferesPage /></RoleRoute>} />
