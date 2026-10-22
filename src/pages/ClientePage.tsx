@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, type FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import "./ClientePage.css";
 
@@ -80,7 +80,7 @@ function ClientePage() {
   const iniciarReserva = (viaje: Viaje) => {
     setViajeId(viaje.id); setAsientoId(null); setSection("asientos"); setMensaje("");
   };
-  const reservar = (event: React.FormEvent<HTMLFormElement>) => {
+  const reservar = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!viajeElegido || !asientoId || !nombre.trim() || !ci.trim()) {
       setMensaje("Completa tus datos y selecciona un asiento disponible."); return;
