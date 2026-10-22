@@ -27,27 +27,44 @@ function LoginPage() {
   return (
     <main className="login-page">
       <section className="login-visual">
-        <div className="login-brand"><span className="login-brand-icon">🚌</span><div><strong>TRANSIT</strong><small>SISTEMA DE GESTIÓN</small></div></div>
-        <div className="login-visual-copy">
-          <span className="login-kicker">TRANSPORTE INTELIGENTE</span>
-          <h1>Todo tu transporte,<br /><em>en un solo lugar.</em></h1>
-          <p>Organiza rutas, administra tu equipo y mantén cada viaje bajo control.</p>
+        <div className="login-brand">
+          <span className="login-brand-icon" aria-hidden="true">AB</span>
+          <div><strong>ANDES BUS</strong><small>SUCRE · BOLIVIA</small></div>
         </div>
-        <div className="login-visual-footer"><span>● Plataforma de gestión</span><span>Seguro · Simple · Eficiente</span></div>
+
+        <div className="login-visual-copy">
+          <span className="login-kicker">CONECTANDO DESTINOS</span>
+          <h1>Tu viaje comienza<br /><em>con una buena gestión.</em></h1>
+          <p>Administra choferes, horarios, autobuses y pasajes desde una sola plataforma de transporte.</p>
+          <div className="login-route-decoration" aria-hidden="true">
+            <span className="route-dot" />
+            <span className="route-line" />
+            <span className="route-bus">🚌</span>
+            <span className="route-line route-line-short" />
+            <span className="route-dot route-dot-end" />
+          </div>
+          <div className="login-location-chip"><span>📍</span> Sucre, Chuquisaca — Bolivia</div>
+        </div>
+
+        <div className="login-visual-footer">
+          <span>ANDES BUS · SISTEMA DE GESTIÓN</span>
+          <span>Seguridad · Puntualidad · Confianza</span>
+        </div>
       </section>
+
       <section className="login-form-side">
         <form className="login-form" onSubmit={handleSubmit}>
-          <span className="login-form-eyebrow">BIENVENIDO DE NUEVO</span>
-          <h2>Iniciar sesión</h2>
-          <p className="login-subtitle">Ingresa tus datos para acceder al sistema.</p>
+          <span className="login-form-eyebrow">PORTAL DE ACCESO</span>
+          <h2>¡Bienvenido!</h2>
+          <p className="login-subtitle">Ingresa a la plataforma de gestión de Andes Bus.</p>
 
-          <label htmlFor="login-role">¿Cómo deseas ingresar?</label>
+          <label htmlFor="login-role">Selecciona tu tipo de cuenta</label>
           <div className="login-role-options">
             <button type="button" className={role === "ADMIN" ? "login-role selected" : "login-role"} onClick={() => setRole("ADMIN")} aria-pressed={role === "ADMIN"}>
               <span>🛡️</span><strong>Administrador</strong><small>Gestionar el sistema</small>
             </button>
             <button type="button" className={role === "CHOFER" ? "login-role selected" : "login-role"} onClick={() => setRole("CHOFER")} aria-pressed={role === "CHOFER"}>
-              <span>🚍</span><strong>Chofer</strong><small>Ver mis viajes</small>
+              <span>🚌</span><strong>Chofer</strong><small>Consultar mis viajes</small>
             </button>
           </div>
 
@@ -56,10 +73,10 @@ function LoginPage() {
           <label htmlFor="login-password">Contraseña</label>
           <input id="login-password" type="password" value={password} onChange={(event) => setPassword(event.target.value)} placeholder="Ingresa tu contraseña" autoComplete="current-password" required />
           {error && <p className="login-error" role="alert">{error}</p>}
-          <button className="login-submit" type="submit">Ingresar al sistema <span>→</span></button>
-          <p className="login-help">Selecciona el rol que corresponde a tu cuenta.</p>
+          <button className="login-submit" type="submit">Ingresar a mi cuenta <span>→</span></button>
+          <p className="login-help">Usa los datos registrados por el administrador del sistema.</p>
         </form>
-        <footer className="login-copyright">© 2026 Sistema de Gestión de Transporte</footer>
+        <footer className="login-copyright">© 2026 Andes Bus · Sucre, Bolivia</footer>
       </section>
     </main>
   );
