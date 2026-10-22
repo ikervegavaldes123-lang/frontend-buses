@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import type { FormEventHandler } from "react";
 import type { LoginCredentials } from "../../types/auth";
@@ -21,9 +22,10 @@ function LoginForm({ error, onSubmit }: LoginFormProps) {
       return;
     }
 
-    onSubmit({
-      carnet: normalizedCarnet,
-      password,
+   onSubmit({
+     carnet: normalizedCarnet,
+     password,
+     role: "ADMIN",
     });
   };
 
