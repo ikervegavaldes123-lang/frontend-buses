@@ -79,3 +79,51 @@
 .driver-quick-icon.blue{color:#8a6900;background:#fff7cc}
 .driver-profile-avatar{color:#8a6900;background:#fff7cc}
 .driver-portal-header .driver-portal-eyebrow{color:#a17a00}
+
+/* Andes Bus: paleta elegante negro y dorado para el portal del chofer */
+.driver-portal{border-color:#3c3322;background:#101010;color:#eee4d2;box-shadow:0 18px 55px rgba(0,0,0,.35)}
+.driver-portal-sidebar{background:linear-gradient(180deg,#080808 0%,#17140e 100%);border-right:1px solid rgba(201,163,91,.24)}
+.driver-portal-brand>span{border-color:rgba(217,183,108,.35);color:#e3c478;background:rgba(217,183,108,.08)}
+.driver-portal-brand strong{color:#e0c27b}
+.driver-portal-brand small,.driver-portal-user small{color:#a79a7c}
+.driver-menu-label{color:#a18a59}
+.driver-portal-nav button{color:#c6bda9}
+.driver-portal-nav button>span{color:#b69a5b}
+.driver-portal-nav button:hover,.driver-portal-nav button.current{color:#17120a;background:linear-gradient(100deg,#b58a3d,#e5c77e);box-shadow:0 6px 20px rgba(185,145,69,.18)}
+.driver-portal-nav button.current>span,.driver-portal-nav button:hover>span{color:#17120a}
+.driver-portal-user{border-color:rgba(217,183,108,.18)}
+.driver-portal-avatar{color:#17120a;background:linear-gradient(145deg,#b58a3d,#e5c77e)}
+.driver-portal-main{background:#101010}
+.driver-portal-eyebrow{color:#d2b36e!important}
+.driver-portal-header h1{color:#f1e8d7}
+.driver-portal-header p{color:#a29a8a}
+.driver-logout{border-color:#40382a;color:#d7c9ad;background:#191713}
+.driver-logout:hover{border-color:#d2b36e;color:#e5c77e;background:#211b10}
+.driver-welcome-card{background:radial-gradient(circle at 90% 20%,rgba(226,190,111,.17),transparent 28%),linear-gradient(120deg,#080808,#312515 72%,#87652c);border:1px solid rgba(217,183,108,.45);box-shadow:0 12px 30px rgba(0,0,0,.25)}
+.driver-welcome-card:after{border-color:rgba(217,183,108,.17);box-shadow:0 0 0 30px rgba(217,183,108,.035),0 0 0 65px rgba(217,183,108,.02)}
+.driver-welcome-tag{color:#e1c47f}
+.driver-welcome-card h2{color:#fff4df}
+.driver-welcome-card p{color:#d0c4ad}
+.driver-welcome-card button{color:#17120a;background:linear-gradient(105deg,#b58a3d,#f0d48e 48%,#bd9347)}
+.driver-welcome-illustration{border-color:rgba(217,183,108,.35);color:#e2c478;background:rgba(217,183,108,.08)}
+.driver-quick-card,.driver-information-panel{border-color:#353127;background:#171717;box-shadow:0 7px 24px rgba(0,0,0,.2)}
+.driver-quick-card:hover{border-color:#9e8249;box-shadow:0 10px 26px rgba(0,0,0,.28)}
+.driver-quick-icon.blue,.driver-quick-icon.violet,.driver-trip-icon,.driver-profile-icon{color:#e4c77f;background:#302719}
+.driver-quick-card strong{color:#eee4d2}
+.driver-quick-card small{color:#a49a87}
+.driver-card-arrow{color:#c2a86d}
+.driver-section-heading{border-color:#302d26}
+.driver-section-heading h2{color:#f1e8d7}
+.driver-section-heading p{color:#a49a87}
+.driver-account-badge{color:#e4c77f;background:#302719}
+.driver-info-row{border-color:#302d26}
+.driver-info-row>span,.driver-profile-summary span{color:#aaa08e}
+.driver-info-row>strong,.driver-profile-summary strong{color:#eee4d2}
+.driver-portal-footer{color:#898071}
+.driver-portal-footer span{color:#d9b76c}
+.driver-empty-trips>span{color:#e4c77f;background:#302719}
+.driver-empty-trips strong{color:#eee4d2}
+.driver-empty-trips p{color:#aaa08e}
+.driver-profile-avatar{color:#e0bf70;background:linear-gradient(145deg,#342a18,#17130c)}
+.driver-session-active{color:#8bd5aa!important}
+@media(max-width:620px){.driver-portal-sidebar{border-right:0;border-bottom:1px solid rgba(201,163,91,.24)}}
