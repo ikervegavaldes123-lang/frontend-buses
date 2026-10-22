@@ -1,23 +1,24 @@
 import { useState, type FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { authRepository } from "../repositories/authRepository";
-import type { UserRole } from "../types/auth";
 import "./LoginPage.css";
 
 function LoginPage() {
   const navigate = useNavigate();
   const [carnet, setCarnet] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState<UserRole>("ADMIN");
   const [error, setError] = useState("");
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setError("");
-    const user = authRepository.login({ carnet: carnet.trim(), password, role });
+    // Detecta automáticamente si las credenciales pertenecen a un administrador o a un chofer.
+    const credentials = { carnet: carnet.trim(), password };
+    const user = authRepository.login({ ...credentials, role: "ADMIN" })
+      ?? authRepository.login({ ...credentials, role: "CHOFER" });
 
     if (!user) {
-      setError("Los datos no coinciden con el rol seleccionado.");
+      setError("Carnet o contraseña incorrectos. Verifica tus datos e inténtalo de nuevo.");
       return;
     }
 
@@ -57,16 +58,6 @@ function LoginPage() {
           <span className="login-form-eyebrow">PORTAL DE ACCESO</span>
           <h2>¡Bienvenido!</h2>
           <p className="login-subtitle">Ingresa a la plataforma de gestión de Andes Bus.</p>
-
-          <label htmlFor="login-role">Selecciona tu tipo de cuenta</label>
-          <div className="login-role-options">
-            <button type="button" className={role === "ADMIN" ? "login-role selected" : "login-role"} onClick={() => setRole("ADMIN")} aria-pressed={role === "ADMIN"}>
-              <span>🛡️</span><strong>Administrador</strong><small>Gestionar el sistema</small>
-            </button>
-            <button type="button" className={role === "CHOFER" ? "login-role selected" : "login-role"} onClick={() => setRole("CHOFER")} aria-pressed={role === "CHOFER"}>
-              <span>🚌</span><strong>Chofer</strong><small>Consultar mis viajes</small>
-            </button>
-          </div>
 
           <label htmlFor="login-carnet">Carnet de identidad</label>
           <input id="login-carnet" value={carnet} onChange={(event) => setCarnet(event.target.value)} placeholder="Ingresa tu número de carnet" autoComplete="username" required />
